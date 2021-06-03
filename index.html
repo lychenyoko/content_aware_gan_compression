@@ -115,7 +115,7 @@
 
 
   
-	  <title>Image-to-Image Translation with Conditional Adversarial Networks</title>
+	  <title>Content-Aware GAN Compression</title>
       <meta property="og:image" content="https://phillipi.github.io/pix2pix/images/teaser_for_fb_v4.png">
       <meta property="og:title" content="Image-to-Image Translation with Conditional Adversarial Networks">
   </head>
@@ -123,43 +123,55 @@
   <body>
     <br>
           <center>
-          	<span style="font-size:36px">Image-to-Image Translation with Conditional Adversarial Nets</span><br><br>
+          	<span style="font-size:36px">Content-Aware GAN Compression</span><br><br>
 	  		  <table align="center" width="600px">
 	  			  <tbody><tr>
 	  	              <td align="center" width="100px">
 	  					<center>
-	  						<span style="font-size:18px"><a href="http://web.mit.edu/phillipi">Phillip Isola</a></span>
+	  						<span style="font-size:18px"><a href="https://lychenyoko.github.io/">Yuchen Liu</a><sup><sup> 1</sup></sup></span>
 		  		  		</center>
 		  		  	  </td>
 	  	              <td align="center" width="100px">
 	  					<center>
-	  						<span style="font-size:18px"><a href="https://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a></span>
+	  						<span style="font-size:18px"><a href="https://zhixinshu.github.io/">Zhixin Shu</a><sup><sup> 2</sup></sup></span>
 		  		  		</center>
 		  		  	  </td>
 	  	              <td align="center" width="100px">
 	  					<center>
-	  						<span style="font-size:18px"><a href="https://people.eecs.berkeley.edu/~tinghuiz/">Tinghui Zhou</a></span>
+	  						<span style="font-size:18px"><a href="https://yijunmaverick.github.io/">Yijun Li</a><sup><sup> 2</sup></sup></span>
 		  		  		</center>
 		  		  	  </td>
 	  	              <td align="center" width="100px">
 	  					<center>
-	  						<span style="font-size:18px"><a href="http://www.eecs.berkeley.edu/~efros/">Alexei A. Efros</a></span>
+	  						<span style="font-size:18px"><a href="https://sites.google.com/site/zhelin625/">Zhe Lin</a><sup><sup> 2</sup></sup></span>
 		  		  		</center>
 		  		  	  </td>
+	  	              <td align="center" width="100px">
+	  					<center>
+	  						<span style="font-size:18px"><a href="https://fperazzi.github.io/">Federico Perazzi</a><sup><sup> 2</sup></sup></span>
+		  		  		</center>
+		  		  	  </td>		 
+	  	              <td align="center" width="100px">
+	  					<center>
+	  						<span style="font-size:18px"><a href="https://ece.princeton.edu/people/sun-yuan-kung">S.Y. Kung</a><sup><sup> 1</sup></sup></span>
+		  		  		</center>
+		  		  	  </td>			  		  	   		  	  
 			  </tr></tbody></table><br>
-              <span style="font-size:18px">University of California, Berkeley</span><br>
-              <span style="font-size:18px">In CVPR 2017</span><br><br>
+              <span style="font-size:18px"><sup><sup> 1</sup></sup>Princeton University </span>   
+			  <span style="font-size:18px"><sup><sup> 2</sup></sup>Adobe Research </span>
+              <br>
+              <span style="font-size:18px">In CVPR 2021</span><br><br>
 
-	  		  <table align="center" width="300px">
+	  		  <table align="center" width="500px">
 	  			  <tbody><tr>
 	  	              <td align="center" width="50px">
 	  					<center>
-	  						<span style="font-size:24px"><a href="https://arxiv.org/abs/1611.07004">[Paper]</a>
+	  						<span style="font-size:24px"><a href="https://arxiv.org/abs/2104.02244">[ArXiv]</a>
 		  		  		</span></center>
 		  		  	  </td>
 	  	              <td align="center" width="50px">
 	  					<center>
-	  						<span style="font-size:24px"><a href="https://github.com/phillipi/pix2pix">[GitHub]</a></span>
+	  						<span style="font-size:24px">[Code Coming Soon!]</span>
 		  		  		</center>
 		  		  	  </td>
 			  </tr></tbody></table>
@@ -173,13 +185,13 @@
   			  <tbody><tr>
   	              <td width="400px">
   					<center>
-  	                	<a href="https://phillipi.github.io/pix2pix/images/teaser_v3.png"><img class="" src="./assets/teaser_v3.jpg" height="360px"></a><br>
+  	                	<img class="" src="./assets/Teaser.gif" height="360px"></a><br>
 					</center>
   	              </td>
                 </tr>
   	              <tr><td width="400px">
                       <center>
-  	                	<span style="font-size:14px"><i>Example results on several image-to-image translation problems. In each case we use the same architecture and objective, simply training on different data.</i>
+  	                	<span style="font-size:14px"><i>Example showing the generative ability of our 11x-accelerated generator vs. the full-szie one. In particular, our model generates the interested contents visually comparable to the full-size model.</i>
                       <center>
   	              </center></span></center></td>
 
@@ -195,16 +207,14 @@
 	  		    </td>
 	  		  </tr>
 			</tbody></table>
-				We investigate conditional adversarial networks as a general-purpose solution to image-to-image translation problems. These networks not only learn the mapping from input image to output image, but also learn a loss function to train this mapping. This makes it possible to apply the same generic approach to problems that traditionally would require very different loss formulations. We demonstrate that this approach is effective at synthesizing photos from label maps, reconstructing objects from edge maps, and colorizing images, among other tasks. As a community, we no longer hand-engineer our mapping functions, and this work suggests we can achieve reasonable results without hand-engineering our loss functions either.
+				Generative adversarial networks (GANs), e.g., StyleGAN2, play a vital role in various image generation and synthesis tasks, yet their notoriously high computational cost hinders their efficient deployment on edge devices. Directly applying generic compression approaches yields poor results on GANs, which motivates a number of recent GAN compression works. While prior works mainly accelerate conditional GANs, e.g., pix2pix and CycleGAN, compressing state-of-the-art unconditional GANs has rarely been explored and is more challenging. In this paper, we propose novel approaches for unconditional GAN compression. We first introduce effective channel pruning and knowledge distillation schemes specialized for unconditional GANs. We then propose a novel content-aware method to guide the processes of both pruning and distillation. With content-awareness, we can effectively prune channels that are unimportant to the contents of interest, e.g., human faces, and focus our distillation on these regions, which significantly enhances the distillation quality. On StyleGAN2 and SN-GAN, we achieve a substantial improvement over the state-of-the-art compression method. Notably, we reduce the FLOPs of StyleGAN2 by 11x with visually negligible image quality loss compared to the full-size model. More interestingly, when applied to various image manipulation tasks, our compressed model forms a smoother and better disentangled latent manifold, making it more effective for image editing.
   		  <br><br>
 		  <hr>
 
 
-	  <!-- NETWORK ARCHITECTURE, TRY THE MODEL -->
- 		<center><h1>Try our code</h1></center>
+<!--  		<center><h1>Try our code</h1></center>
 
   		  <center>
-				<!-- <span style="font-size:28px">Code coming soon!</span></i>			  	 -->
 				<div style="width:600px; text-align:left">
 					<span style="font-size:28px">&nbsp;Recommended version: <a href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix">[PyTorch]</a></span><br>
 					<span style="font-size:28px">&nbsp;Original code: <a href="https://github.com/phillipi/pix2pix">[Torch]</a></span>
@@ -223,20 +233,20 @@
 			  <br>
 			  </center><table align="center" width="800px">
 			  <tbody><tr></tr>
-		  </tbody></table>
+		  </tbody></table> -->
 
 <!-- <a href="http://www.eecs.berkeley.edu/~rich.zhang/projects/2016_colorization/files/demo_v0/colorization_release_v0.caffemodel">[Model 129MB]</span> -->
 
-      	  <br>
-		  <hr>
+<!--       	  <br>
+		  <hr> -->
 
-			<center><h1>Paper</h1></center>
+			<center><h1>Full Paper with Supplementary</h1></center>
 			<table align="center" width="700" px="">
 			          <tbody><tr>
-			          <td><a href="https://arxiv.org/abs/1611.07004"><img class="layered-paper-big" style="height:175px" src="./assets/paper_pdf_thumb.png"></a></td>
-			          <td><br><br><br><span style="font-size:12pt">Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, Alexei A. Efros</span><br>
-			          <b><span style="font-size:12pt">Image-to-Image Translation with Conditional Adversarial Networks</span></b><br>
-			          <span style="font-size:12pt">CVPR, 2017 (<a href="https://arxiv.org/abs/1611.07004">Paper</a>)</span>
+			          <td><a href="https://arxiv.org/abs/2104.02244"><img class="layered-paper-big" style="height:175px" src="./assets/paper_pdf_thumb.png"></a></td>
+			          <td><br><br><br><span style="font-size:12pt">Yuchen Liu, Zhixin Shu, Yijun Li, Zhe Lin, Federico Perazzi, S.Y. Kung</span><br>
+			          <b><span style="font-size:12pt">Content-Aware GAN Compression</span></b><br>
+			          <span style="font-size:12pt">CVPR, 2021 (<a href="https://arxiv.org/abs/1611.07004">Paper</a>)</span>
 			          </td>
 								</tr>
 					</tbody></table>
@@ -247,7 +257,7 @@
                 <td>
                   <center>
                     <span style="font-size:22px">
-                      <a href="https://phillipi.github.io/pix2pix/resources/bibtex_cvpr_pix2pix.txt" target="_blank">[bibtex]</a>
+                      <a href="./assets/bibtex.txt" target="_blank">[bibtex]</a>
                     </span>
                   </center>
                 </td>
@@ -257,7 +267,7 @@
 			
 		  <br><br>
 
-          <hr>
+<!--           <hr>
           	  <table align="center" width="1100px">
           		  <tbody><tr>
                         <td width="400px">
@@ -267,10 +277,10 @@
                   </left></td>
               </tr>
           </tbody></table>
-          <br>
+          <br> -->
 
 
-          <hr>
+<!--           <hr>
 	 		<center><h1>Expository articles and videos</h1></center>
      		  <br>
      		  <table align="center" width="1100px">
@@ -293,9 +303,9 @@
                    </tr>
      		  </tbody></table>
 		  <br><br>
-		  <hr>
+		  <hr> -->
 
-  		  <a name="bw_legacy"></a>
+ <!--  		  <a name="bw_legacy"></a>
   		  <center><h1>Experiments</h1></center>
           Here we show comprehensive results from each experiment in our paper. Please see the paper for details on these experiments.<br>
           <br>
@@ -323,7 +333,6 @@
           <a href="https://phillipi.github.io/pix2pix/images/map2sat1_BtoA/latest_net_G_val/index.html">Map to aerial</a><br>
           <a href="https://phillipi.github.io/pix2pix/images/sat2map1_AtoB/latest_net_G_val/index.html">Aerial to map</a><br>
           <a href="https://phillipi.github.io/pix2pix/images/cityscapes_cGAN_AtoB/latest_net_G_val/index.html">Semantic segmentation</a><br>
-          <!--<a href="./images/colorization/index.html">Colorization</a><br>-->
           <a href="https://phillipi.github.io/pix2pix/images/att_night/latest_net_G_val/index.html">Day to night</a><br>
           <a href="https://phillipi.github.io/pix2pix/images/sketch2photo_handbag/latest_net_G_val/index.html">Edges to handbags</a><br>
           <a href="https://phillipi.github.io/pix2pix/images/sketch2photo_shoes/latest_net_G_val/index.html">Edges to shoes</a><br>
@@ -333,10 +342,10 @@
 
       </td>
       </tr>
-          </tbody></table>
+          </tbody></table> -->
 
 
-  	  	<hr>
+ <!--  	  	<hr>
 
 	  <table align="center" width="1100px">
 		  <tbody><tr>
@@ -425,9 +434,9 @@
               <br>
         </left></td>
     </tr>
-</tbody></table>
+</tbody></table> -->
 
-        <hr>
+<!--         <hr>
 
 
  		  <a name="related_work"></a>
@@ -440,8 +449,6 @@
           <a href="https://arxiv.org/abs/1406.2661">Generative adversarial networks</a> have been vigorously explored in the last two years, and many conditional variants have been proposed. Please see the discussion of related work in <a href="https://arxiv.org/abs/1611.07004">our paper</a>. Below we point out three papers that especially influenced this work: the original GAN paper from Goodfellow et al., the <a href="https://github.com/soumith/dcgan.torch">DCGAN framework</a>, from which our code is derived, and the iGAN paper, from our lab, that first explored the idea of using GANs for mapping user strokes to images.
 
   		  <br><br>
-
-  		  <!-- <br><br> -->
 
 				Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. <b>Generative Adversarial Networks</b>. NIPS, 2014. <a href="https://arxiv.org/pdf/1406.2661v1.pdf">[PDF]</a><br>
                 <br>
@@ -481,9 +488,9 @@
 			 </tr>
 		</tbody></table>
 
-		<br><br>
+		<br><br> -->
 
-<script>
+<!-- <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -492,7 +499,7 @@
   ga('create', 'UA-24665197-6', 'auto');
   ga('send', 'pageview');
 
-</script>
+</script> -->
 
 
 

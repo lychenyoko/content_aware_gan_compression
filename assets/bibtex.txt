@@ -1,0 +1,6 @@
+@inproceedings{liu2021content,
+  title     = {Content-Aware GAN Compression},
+  author    = {Liu, Yuchen and Shu, Zhixin and Li, Yijun and Lin, Zhe and Perazzi, Federico and Kung, S.Y.},
+  booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2021},
+}
